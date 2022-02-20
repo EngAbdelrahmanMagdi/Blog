@@ -21,10 +21,23 @@ class PostController extends Controller
     //       'users'=> $users, 
     //       'greeting'=> 'this is greeting from TestController Class'
     //   ]);
+    // var_dump($posts);
+    // exit;
+    // dd($posts);
       return view('posts.index', 
       [
           'posts'=> $posts,
       ]
     );
    }
+
+   public function create(){
+     return view('posts.create', 
+     ['posts.create']
+   );
+   }
+
+   public function show($postId){
+    return $postId; 
+  }
 }

@@ -16,8 +16,9 @@ use App\Http\Controllers\PostController; //require
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route:: get('/post', [PostController::class, 'index'] );
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::get('/post', [PostController::class, 'index'] );
+Route::get('/posts/{post}', [PostController::class, 'show'] )->name('posts.show');
 
 // Route::get('/test', function () {
 //     // $x= [ ['id'=> 1, 'name'=> 'abdelrahman'], ['id'=> 2, 'name'=> 'Ali'] ];
