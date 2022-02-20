@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 // use Illuminate\Routing\Controller as PostController;
 use Carbon\Carbon as Carbon;
 use App\Models\Post;
-
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
    public function index() {
@@ -21,6 +22,17 @@ class PostController extends Controller
         ['id'=> 3, 'title'=> 'Third Post', 'posted_by'=> 'Ahmed', 'created_at'=> '2022-02-30 10:00:00']
 
     ];
+    $posts = Post::all();
+    $posts= post::paginate(7); 
+    return view('posts.index', 
+    [
+      // compact('post'),
+        'posts'=> $posts,
+        
+        
+    ]
+    
+  );
 
 
     // $postss=Post::all();
@@ -40,77 +52,111 @@ class PostController extends Controller
     // var_dump($posts);
     // exit;
     // dd($posts);
-      return view('posts.index', 
-      [
-          'posts'=> $posts,
-      ]
-    );
+     
    }
 
-   public function show($id)
+   public function show($postId)
     {
-        $post = [
-            "id" => 1,
-            "title" => "First Post",
-            "posted_by" => "Abdelrahman",
-            "created_at" => Carbon::now()->addHour(-3)->toDateTimeString(),
-        ];
+      $post = Post::find($postId);
+        // $post = [
+        //     "id" => 1,
+        //     "title" => "First Post",
+        //     "posted_by" => "Abdelrahman",
+        //     "created_at" => Carbon::now()->addHour(-3)->toDateTimeString(),
+        // ];
         return view('posts.show', ['post' => $post]);
 
 
 
-        // $post= Post::find($id);
-        // // $postOtherSyntax=Post
-        // return $id;
+        // $post = Post::find($postId); //App\Model\Post
+        //$postOtherSyntax = Post::where('id', $postId)->first();
+        // dd($post, $postOtherSyntax);
+        //return $postId;
     }
 
    public function create(){
-     return view('posts.create', 
-     ['posts.create']
-   );
+    $users = User::all();
+    return view('posts.create',[
+      'users' => $users,
+  ]);
+
+
+    //  return view('posts.create', 
+    //  ['posts.create']
+   //);
 
 
 
-  //  $users= User::all();
+ 
    }
 
   //  public function show($postId){
   //   return $postId; 
   // }
   public function store() {
-    $requestData = request(); 
+
+    $requestData = request()->all();
+    Post::create($requestData);
+    return redirect()->route('posts.index');
+
+
+
     // dd(request()->all());
-    dd($requestData->all());
+    // dd($requestData->all());     
+     // Post::create([
+        //     'title' => $requestData['title'],
+        //     'description' => $requestData['description'],
+        //     'user_id' => $requestData['post_creator']
+        // ]);
+
+       
+
     
 
-
-
-
-    // Post::create(['title'=>$requestData['title'], 
-    //     'description'=>$requestData['description']
-    //   ]);
-
       //return redirect()->route('posts.index');
+       // return to_route('posts.index'); in laravel 9 only
     
   }
 
   public function edit($id)
     {
-        $post = [
-                "id" => 1,
-                "title" => "Title of the post",
-                "description" => "This is my post description.",
-            ];
-        return view("posts.edit",['post' => $post]);
+        // $post = [
+        //         "id" => 1 ,
+        //         "title" => "",
+        //         "description" => "",
+        //     ];
+        // return view("posts.edit",['post' => $post]);
+
+
+
+
+        $edit = Post::find($id);
+        
+        return view("posts.edit",['post'=> $edit]);
     }
+    
 
   public function update(Request $request, $id)
     {
-        dd($request->all());
+      Post::find($id)->update($request->all());
+   
+   
+      return redirect()->route('posts.index');
+
+
+
+
+
+
+
+        //dd($request->all());
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        dd(request()->all());
+      Post::find($id)->delete($request->all());
+      return redirect()->route('posts.index');
+
+        //dd(request()->all());
     }
 }

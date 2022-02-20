@@ -18,8 +18,9 @@
             Post Creator Info
         </div>
         <div class="card-body">
-            <p> <span class="fw-bold">Name: </span>{{ $post['posted_by'] }}</p>
+            <p> <span class="fw-bold">Name: </span>{{ 'abdelrahman' }}</p>
             <p><span class="fw-bold">Created At: </span>{{ $post['created_at'] }}</p>
+            
         </div>
     </div>
 @endsection

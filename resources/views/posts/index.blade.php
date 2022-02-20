@@ -28,13 +28,14 @@
       <td>{{$post['created_at']}}</td>
       <!-- <td><a href="{{route('posts.show', $post['id'])}}" class="btn btn-info"> View </a></td> -->
       <td><a role="button" href="{{route('posts.show',$post['id'])}}" class="btn btn-success">View</a></td>
-            <td><a role="button" href="{{route('posts.edit', $post['id'])}}" class="btn btn-primary">Edit</a></td>
-            <td>
-                <form action="{{route('posts.delete',$post['id'])}}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form></td>
+      <td><a role="button" href="{{route('posts.edit', $post['id'])}}" class="btn btn-primary">Edit</a></td>
+      <td>
+        <form action="{{route('posts.delete',$post['id'])}}" method="post">
+          @csrf
+          @method('delete')
+          <button type="submit" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to Delete?');" id="btnDelete">Delete</button>
+        </form>
+      </td>
     </tr>
     @endforeach
 
@@ -42,10 +43,13 @@
   </tbody>
 </table>
 
+
 <nav aria-label="...">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+  <ul class="pagination justify-content-center">
+
+    {{$posts->links()}}
+    <!-- <li class="page-item active">
+                <a class="page-link" href="#" tabindex="-1" aria-active="true">Previous</a>
             </li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item active" aria-current="page">
@@ -54,8 +58,11 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
                 <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+            </li> -->
+
+  </ul>
+
+</nav>
+
 
 @endsection
