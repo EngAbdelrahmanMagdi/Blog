@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController; //require
+use App\Http\Controllers\PostController; //require
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route:: get('/test', [TestController::class, 'test2'] );
+Route:: get('/post', [PostController::class, 'index'] );
 
 // Route::get('/test', function () {
 //     // $x= [ ['id'=> 1, 'name'=> 'abdelrahman'], ['id'=> 2, 'name'=> 'Ali'] ];
