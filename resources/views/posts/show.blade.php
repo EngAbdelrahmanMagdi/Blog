@@ -2,7 +2,7 @@
 @section("123")
     View Post
 @endsection
-@section("abc")
+@section("content")
     <div class="card w-75 mx-auto">
         <div class="card-header">
             Post Info

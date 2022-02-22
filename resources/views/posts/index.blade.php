@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('123') Index @endsection
-@section('abc')
+@section('content')
+
 <div class="text-center mt-5">
   <a href="{{route('posts.create')}}" class="btn btn-success"> Create Post </a>
 </div>
@@ -8,13 +9,11 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">ID</th>
       <th scope="col">Title</th>
       <th scope="col">Posted By</th>
       <th scope="col">Created At</th>
-      <th scope="col">-</th>
-      <th scope="col">-</th>
-      <th scope="col">-</th>
+      <th scope="col" colspan="3">Actions</th>
     </tr>
   </thead>
   <tbody>

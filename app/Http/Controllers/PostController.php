@@ -8,6 +8,7 @@ use Carbon\Carbon as Carbon;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
    public function index() {
@@ -93,10 +94,27 @@ class PostController extends Controller
   //  public function show($postId){
   //   return $postId; 
   // }
-  public function store() {
+  public function store(StorePostRequest $request) {
+
+    // request()->validate([
+    //   'title'=> ['required', 'min:3'], 
+    //   'description'=> ['required','min:7'],
+    // ],
+    // ['title.required'=> 'overrieded required message',
+    // 'title.min'=>'change the min rule default message']
+  
+  //);
 
     $requestData = request()->all();
     Post::create($requestData);
+  //   request()->validate([
+  //     'title'=> ['required', 'min:3'], 
+  //     'description'=> ['required','min:7'],
+  //   ],
+  //   ['title.required'=> 'overrieded required message',
+  //   'title.min'=>'change the min rule default message']
+  
+  // );
     return redirect()->route('posts.index');
 
 
@@ -138,6 +156,16 @@ class PostController extends Controller
 
   public function update(Request $request, $id)
     {
+        request()->validate([
+      'title'=> ['required', 'min:3'], 
+      'description'=> ['required','min:7'],
+    ],
+    ['title.required'=> 'title must be existed',
+    'title.min'=>'title must be at least 3 character ',
+    'title.unique'=>'title must be unique '
+    ]
+  
+  );
       Post::find($id)->update($request->all());
    
    

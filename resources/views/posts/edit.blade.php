@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section("123")
-    Create New Post
+    Update
 @endsection
-@section("abc")
+@section("content")
     <div class="card w-75 mx-auto">
         <div class="card-header">
             Edit Post

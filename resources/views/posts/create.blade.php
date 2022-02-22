@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('123') Create @endsection
-@section('abc')
+@section('content')
 <form method="post" action="{{route('posts.store')}}" class="mt-5">
     @csrf
     
