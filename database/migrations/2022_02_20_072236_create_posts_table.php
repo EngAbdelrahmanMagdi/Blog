@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title',100);
             $table->text('description');
-            $table->text('test');
+            $table->text('posted_by');
             $table->text('test2');
             $table->text('test3');
             $table->timestamps();

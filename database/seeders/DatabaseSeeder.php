@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         DB::table('posts')->insert([
             'title' => Str::random(5),
             'description' => Str::random(5),
+            'posted_by' => Str::random(5),
             
            "created_at" => Carbon::now()->addHour(-3)->toDateTimeString(), 
         ]);
